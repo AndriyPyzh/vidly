@@ -1,0 +1,17 @@
+const express = require('express');
+const router = express.Router();
+const {
+    getCustomers,
+    getCustomer,
+    createCustomer
+} = require('../controllers/customers');
+
+router.route("/")
+    .get(getCustomers)
+    .post(createCustomer);
+
+router.route("/:id")
+    .get(getCustomer);
+
+module.exports = router;
+

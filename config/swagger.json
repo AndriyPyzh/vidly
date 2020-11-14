@@ -1,0 +1,316 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+	"version": "1.0.0",
+	"title": "Seans-TypeScript-NodeJS-CRUD-REST-API-Boilerplate",
+	"description": "A minimal and easy to follow example of what you need to create a CRUD style API in NodeJs using TypeScript",
+	"license": {
+	  "name": "MIT",
+	  "url": "https://opensource.org/licenses/MIT"
+	}
+  },
+  "consumes": [
+	"application/json"
+  ],
+  "produces": [
+	"application/json"
+  ],
+  "paths": {
+	"/genres": {
+	  "get": {
+		"summary": "Get all genres",
+		"responses": {
+		  "200": {
+			"description": "OK",
+			"schema": {
+			  "$ref": "#/definitions/Genres"
+			}
+		  }
+		}
+	  },
+	  "post": {
+		"summary": "Create a new genre",
+		"requestBody": {
+		  "description": "Genre Object",
+		  "required": true,
+		  "content": {
+			"application/json": {
+			  "schema": {
+				"$ref": "#/definitions/name"
+			  }
+			}
+		  }
+		},
+		"produces": [
+		  "application/json"
+		],
+		"responses": {
+		  "200": {
+			"description": "OK",
+			"schema": {
+			  "$ref": "#/definitions/id"
+			}
+		  },
+		  "400": {
+			"description": "Failed. Bad post data."
+		  }
+		}
+	  }
+	},
+	"/genres/{id}": {
+	  "parameters": [
+		{
+		  "name": "id",
+		  "in": "path",
+		  "required": true,
+		  "description": "ID of the genre that we want to match",
+		  "type": "string"
+		}
+	  ],
+	  "get": {
+		"summary": "Get genre with given ID",
+		"parameters": [
+		  {
+			"in": "path",
+			"name": "id",
+			"required": true,
+			"description": "Genre with id",
+			"schema": {
+			  "$ref": "#/definitions/id"
+			}
+		  }
+		],
+		"responses": {
+		  "200": {
+			"description": "OK",
+			"schema": {
+			  "$ref": "#/definitions/Genre"
+			}
+		  },
+		  "404": {
+			"description": "Failed. Cat not found."
+		  }
+		}
+	  },
+	  "put": {
+		"summary": "Update genre with given ID",
+		"requestBody": {
+		  "description": "Genre Object",
+		  "required": true,
+		  "content": {
+			"application/json": {
+			  "schema": {
+				"$ref": "#/definitions/name"
+			  }
+			}
+		  }
+		},
+		"parameters": [
+		  {
+			"in": "path",
+			"name": "id",
+			"required": true,
+			"description": "Genre with new values of properties",
+			"schema": {
+			  "$ref": "#/definitions/id"
+			}
+		  }
+		],
+		"responses": {
+		  "200": {
+			"description": "OK",
+			"schema": {
+			  "$ref": "#/definitions/Genre"
+			}
+		  },
+		  "400": {
+			"description": "Failed. Bad post data."
+		  },
+		  "404": {
+			"description": "Failed. Genre not found."
+		  }
+		}
+	  },
+	  "delete": {
+		"summary": "Delete Genre with given ID",
+		"parameters": [
+		  {
+			"in": "path",
+			"name": "id",
+			"required": true,
+			"description": "Delete Genre with id",
+			"schema": {
+			  "$ref": "#/definitions/id"
+			}
+		  }
+		],
+		"responses": {
+		  "200": {
+			"description": "OK",
+			"schema": {
+			  "$ref": "#/definitions/id"
+			}
+		  },
+		  "404": {
+			"description": "Failed. Genre not found."
+		  }
+		}
+	  }
+	},
+	"/movies": {
+	  "get": {
+		"summary": "Get all movies",
+		"responses": {
+		  "200": {
+			"description": "OK",
+			"schema": {
+			  "$ref": "#definitions/Movies"
+			}
+		  },
+		  "404": {
+			"description": "NOT FOUND"
+		  }
+		}
+	  },
+	  "post": {
+		"summary": "Add new movie",
+		"requestBody": {
+		  "description": "Movie Object",
+		  "required": true,
+		  "content": {
+			"application/json": {
+			  "schema": {
+				"$ref": "#/definitions/Movie"
+			  }
+			}
+		  }
+		},
+		"produces": [
+		  "application/json"
+		],
+		"responses": {
+		  "201": {
+			"description": "OK",
+			"schema": {
+			  "$ref": "#/definitions/Movie"
+			}
+		  },
+		  "400": {
+			"description": "Failed"
+		  }
+		}
+	  }
+	},
+	"/movies/{id}": {
+	  "put": {
+		"summary": "Updates a movie",
+		"parameters": [
+		  {
+			"in": "path",
+			"name": "id",
+			"required": true,
+			"description": "Movie with id",
+			"schema": {
+			  "$ref": "#/definitions/id"
+			}
+		  }
+		],
+		"responses": {
+		  "200": {
+			"description": "OK",
+			"schema": {
+			  "$ref": "#definitions/Movie"
+			}
+		  }
+		}
+	  },
+	  "delete": {
+		"summary": "delete a movie",
+		"parameters": [
+		  {
+			"in": "path",
+			"name": "id",
+			"required": true,
+			"schema": {
+			  "$ref": "#/definitions/id"
+			}
+		  }
+		],
+		"responses": {
+		  "200": {
+			"description": "OK",
+			"schema": {
+			  "$ref": "#/definitions/Movie"
+			}
+		  }
+		}
+	  }
+	}
+  },
+  "definitions": {
+	"id": {
+	  "properties": {
+		"uuid": {
+		  "type": "string"
+		}
+	  }
+	},
+	"name": {
+	  "properties": {
+		"name": {
+		  "type": "string"
+		}
+	  }
+	},
+	"Genre": {
+	  "type": "object",
+	  "properties": {
+		"name": {
+		  "type": "string"
+		}
+	  }
+	},
+	"Genres": {
+	  "type": "object",
+	  "properties": {
+		"genres": {
+		  "type": "object",
+		  "additionalProperties": {
+			"$ref": "#/definitions/Genre"
+		  }
+		}
+	  }
+	},
+	"Movie": {
+	  "type": "object",
+	  "properties": {
+		"title": {
+		  "type": "string"
+		},
+		"numberInStock": {
+		  "type": "integer"
+		},
+		"dailyRentalRate": {
+		  "type": "integer"
+		},
+		"genreId": {
+		  "type": "integer"
+		},
+		"liked": {
+		  "type": "boolean"
+		}
+	  }
+	},
+	"Movies": {
+	  "type": "object",
+	  "properties": {
+		"movies": {
+		  "type": "object",
+		  "additionalProperties": {
+			"$ref": "#/definitions/Movie"
+		  }
+		}
+	  }
+	}
+  }
+}
